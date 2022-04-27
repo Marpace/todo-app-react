@@ -36,7 +36,7 @@ function App() {
   }
 
   function changeTheme(theme){
-    fetch("https://todo-api-6215.herokuapp.com//change-theme", {
+    fetch("https://todo-api-6215.herokuapp.com/change-theme", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -53,7 +53,7 @@ function App() {
   }
 
   function addItem(inputValue){
-        fetch("https://todo-api-6215.herokuapp.com//add-item", {
+        fetch("https://todo-api-6215.herokuapp.com/add-item", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -66,7 +66,7 @@ function App() {
   }
 
   function deleteItem(id){
-    fetch("https://todo-api-6215.herokuapp.com//delete-item", {
+    fetch("https://todo-api-6215.herokuapp.com/delete-item", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -79,7 +79,7 @@ function App() {
   }
 
   function clearCompleted(){
-    fetch("https://todo-api-6215.herokuapp.com//clear-completed", {
+    fetch("https://todo-api-6215.herokuapp.com/clear-completed", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -93,7 +93,7 @@ function App() {
   }
 
   function updateListOrder(evt){
-    fetch("https://todo-api-6215.herokuapp.com//update-list-order", {
+    fetch("https://todo-api-6215.herokuapp.com/update-list-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
