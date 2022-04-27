@@ -10,7 +10,7 @@ function ListItem(props) {
 
     function handleChecked(){
         
-        fetch("http://localhost:5000/check-item", {
+        fetch("https://todo-api-6215.herokuapp.com/check-item", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
