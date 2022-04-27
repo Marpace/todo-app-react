@@ -34,11 +34,11 @@ function ListItem(props) {
             onClick={handleChecked} 
             className={`todo-list__item-check ${status === "active" ? `border-${props.theme}` : "item-checked"} `}
             id={status}>
-                <img className={`icon-check ${status === "active" ? "hidden" : "show"}`} src="/images/icon-check.svg" alt=""></img>
+                <img className={`icon-check ${status === "active" ? "hidden" : "show"}`} src="./images/icon-check.svg" alt=""></img>
             </button>               
             <span className={`todo-list__item-text text-${props.theme} ${status === "active" ? "" : "line-through"}`}>{props.content}</span>
             <button className="todo-list__item-delete" onClick={handleClick}>
-                <img className="item-delete__img" src="/images/icon-cross.svg" alt=""></img>
+                <img className="item-delete__img" src="./images/icon-cross.svg" alt=""></img>
             </button>
         </div>
     );
