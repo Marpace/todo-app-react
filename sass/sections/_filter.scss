@@ -1,0 +1,21 @@
+.filter {
+    padding: 20px 70px;
+    margin: 20px 0;
+    border-radius: 5px;
+    @include flex_centered(row);
+    justify-content: space-evenly;
+    @include responsive($tablet_large){
+        display: none;
+    }
+
+    .filter-option {
+        color: $dark_grayish_blue;
+        font-size: .8rem;
+        font-weight: 700;
+        cursor: pointer;
+        user-select: none;
+    }
+    .filter-active {
+        color: $bright_blue;
+    }
+}
