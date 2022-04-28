@@ -5,6 +5,7 @@ import ListFooter from "./components/ListFooter";
 import Filters from "./components/Filters";
 import {useEffect, useState} from "react"
 import {ReactSortable} from "react-sortablejs";
+import LoadingScreen from "./components/loadingScreen"
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [itemsLeft, setItemsLeft] = useState()
   const [theme, setTheme] = useState("");
   const [currentFilter, setCurrentFilter] = useState("all");
+  const [loading, setLoading] = useState(false)
 
   function getItems(){
     fetch('https://todo-api-6215.herokuapp.com/get-items')
@@ -27,11 +29,13 @@ function App() {
 
   
   function getTheme(){
+    setLoading(true);
     fetch('https://todo-api-6215.herokuapp.com/get-theme')
     .then(response => response.json())
     .then(data =>{
       setTheme(data.theme);
       console.log("theme: " + data.theme)
+      setLoading(false);
     });
   }
 
@@ -164,6 +168,9 @@ function App() {
           applyFilter={applyFilter}
           filter={currentFilter}
         />
+         <LoadingScreen 
+           state={loading ? "show" : "hidden"}
+         />
       </div>
     </main>
   );
