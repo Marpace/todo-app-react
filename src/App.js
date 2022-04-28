@@ -169,7 +169,7 @@ function App() {
           filter={currentFilter}
         />
          <LoadingScreen 
-           state={loading ? "show" : "hidden"}
+           state={loading ? "show-flex" : "hidden"}
          />
       </div>
     </main>
