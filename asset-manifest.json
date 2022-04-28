@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.f2e0ebe9.js",
-    "index.html": "/index.html",
-    "main.f2e0ebe9.js.map": "/static/js/main.f2e0ebe9.js.map"
+    "main.js": "/todo-app-react/static/js/main.f2e0ebe9.js",
+    "index.html": "/todo-app-react/index.html",
+    "main.f2e0ebe9.js.map": "/todo-app-react/static/js/main.f2e0ebe9.js.map"
   },
   "entrypoints": [
     "static/js/main.f2e0ebe9.js"
