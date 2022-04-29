@@ -19,23 +19,25 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   function getItems(){
+    setLoading(true);
     fetch('https://todo-api-6215.herokuapp.com/get-items')
     .then(response => response.json())
     .then(data =>{
         setItems(data.items);
         setItemsLeft(data.items.filter(item => item.status === "active").length)
+        setLoading(false);
     });
   }
 
   
   function getTheme(){
-    setLoading(true);
+    
     fetch('https://todo-api-6215.herokuapp.com/get-theme')
     .then(response => response.json())
     .then(data =>{
       setTheme(data.theme);
       console.log("theme: " + data.theme)
-      setLoading(false);
+      
     });
   }
 
