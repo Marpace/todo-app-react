@@ -10,6 +10,8 @@ import LoadingScreen from "./components/loadingScreen"
 
 function App() {
 
+  // const base_url = "http://localhost:5000";
+  const base_url = "https://todo-api-6215.herokuapp.com"
 
 
   const [items, setItems] = useState([]);
@@ -19,7 +21,8 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   function getItems(){
-    fetch('https://todo-api-6215.herokuapp.com/get-items')
+    
+    fetch(`${base_url}/get-items`)
     .then(response => response.json())
     .then(data =>{
         setItems(data.items);
@@ -30,17 +33,16 @@ function App() {
   
   function getTheme(){
     setLoading(true);
-    fetch('https://todo-api-6215.herokuapp.com/get-theme')
+    fetch(`${base_url}/get-theme`)
     .then(response => response.json())
     .then(data =>{
       setTheme(data.theme);
-      console.log("theme: " + data.theme)
       setLoading(false);
     });
   }
   
   function changeTheme(theme){
-    fetch("https://todo-api-6215.herokuapp.com/set-theme", {
+    fetch(`${base_url}/set-theme`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -57,7 +59,8 @@ function App() {
   }
 
   function addItem(inputValue){
-        fetch("https://todo-api-6215.herokuapp.com/add-item", {
+    console.log("fired")
+        fetch(`${base_url}/add-item`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -70,7 +73,7 @@ function App() {
   }
 
   function deleteItem(id){
-    fetch("https://todo-api-6215.herokuapp.com/delete-item", {
+    fetch(`${base_url}/delete-item`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -83,7 +86,7 @@ function App() {
   }
 
   function clearCompleted(){
-    fetch("https://todo-api-6215.herokuapp.com/clear-completed", {
+    fetch(`${base_url}/clear-completed`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -97,7 +100,7 @@ function App() {
   }
 
   function updateListOrder(evt){
-    fetch("https://todo-api-6215.herokuapp.com/update-list-order", {
+    fetch(`${base_url}/update-list-order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

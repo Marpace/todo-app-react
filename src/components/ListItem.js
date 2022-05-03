@@ -2,6 +2,10 @@ import { useState } from "react";
 
 function ListItem(props) {
 
+    const base_url = "http://localhost:5000";
+    // const base_url = "https://todo-api-6215.herokuapp.com"
+
+
     const [status, setStatus] = useState(props.status)
 
     function handleClick(){
@@ -10,7 +14,7 @@ function ListItem(props) {
 
     function handleChecked(){
         
-        fetch("https://todo-api-6215.herokuapp.com/check-item", {
+        fetch(`${base_url}/check-item`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -21,6 +25,7 @@ function ListItem(props) {
         .then((data) => {
             setStatus(data.newStatus);
             props.getItems();
+            console.log(status)
         })
         
     }  
