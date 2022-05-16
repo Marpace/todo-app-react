@@ -1,0 +1,21 @@
+.bottom-text {
+    text-align: center;
+    margin-top: 50px;
+
+    p {
+        font-size: 1rem;
+        color: $dark_grayish_blue
+    }
+    &__desktop {
+        display: none;
+    }
+
+    @include responsive($tablet_large) {
+        &__mobile {
+            display: none;
+        }
+        &__desktop {
+            display: block;
+        }
+    }
+}

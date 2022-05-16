@@ -1,0 +1,223 @@
+.login {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image:  linear-gradient( 140deg, hsl(192, 100%, 81%), hsl(280, 87%, 65%));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include responsive($tablet_large) {
+        background: hsl(235, 21%, 11%); 
+    }
+
+    &__header {
+        text-align: left;
+        width: 90%;
+        max-width: 400px;
+        transform: translateY(-50px);
+
+        &-title {
+            color: hsl(235, 24%, 19%);
+            letter-spacing: 10px; 
+            font-size: 3rem;
+            @include responsive($tablet_large){
+                color: hsl(234, 39%, 85%);
+            }
+        }
+    }
+    &__top {
+        width: 90%;
+        width: 90%;
+        max-width: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        h1 {
+            font-size: 20px;
+            color: hsl(234, 39%, 85%);
+        }
+        .top__section {
+            position: relative;
+            width: 50%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: hsl(235, 24%, 19%);
+            transition: .2s;
+        }
+        .top__front{
+            z-index: 100;
+            height: 80px;
+        }
+
+        .top__login::after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 100%;
+            height: 100%;
+            width: 10px;
+            background-image: linear-gradient(to right, rgba(26, 26, 44, 0.842), rgba(0, 0, 0, 0));
+        }
+
+        .top__register::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            right: 100%;
+            height: 100%;
+            width: 10px;
+            background-image: linear-gradient(to left, rgba(26, 26, 44, 0.842), rgba(0, 0, 0, 0));
+        }
+
+        .top__back {
+            height: 70px;
+            z-index: 90;
+            cursor: pointer;
+        }
+
+        .top__back:hover > h1 {
+            color: hsl(234, 39%, 85%);
+        }
+
+        .top__back h1 {
+            color: hsl(234, 14%, 42%);
+        }
+    }
+    &__body {
+        position: relative;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        height: 400px;
+        width: 90%;
+        max-width: 400px;
+        padding: 20px 0;
+        display: flex;
+        background-color: hsl(235, 24%, 19%);
+        z-index: 100;
+        transition: .2s;
+        box-shadow: 0px 15px 17px -12px rgb(20, 20, 20);
+
+        .forgotPassword {
+            color: hsl(234, 39%, 85%);
+            font-size: .9rem;
+            text-decoration: underline;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .form {
+            position: absolute;
+            top: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content:space-between;
+            align-items: center;
+            height: 60%;
+            width: 100%;
+            transition: .2s;
+
+            button {
+                background: none;
+                border: 1px solid hsl(234, 39%, 85%);
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 20px;
+                color: hsl(234, 39%, 85%);
+                transition: .4s;
+                cursor: pointer;
+                width: 200px;
+
+                &:hover {
+                    color: hsl(235, 24%, 19%);
+                    background-image:  linear-gradient( 140deg, hsl(192, 100%, 81%), hsl(280, 87%, 65%));
+                }
+            }
+
+            &-hidden {
+                display: none;
+            }
+            &-flex {
+                display: flex;
+            }
+        }
+        .register-form {
+            height: 75%;
+            padding-bottom: 20px;
+        }
+        .form-inputs {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            width: 100%;
+
+            input {
+                background: none;
+                border: none;
+                border-bottom: 1px solid hsl(233, 14%, 35%);
+                width: 90%;
+                font-size: 20px;
+                padding: 0 10px;
+                color: hsl(234, 39%, 85%);
+            }
+            input:focus {
+                outline: none;
+            }
+            .match {
+                color: rgb(112, 177, 112);
+            }
+            .no-match {
+                color: rgb(212, 129, 129);
+            }
+            label {
+                position: absolute;
+                top: 190px;
+                left: 20px;
+                font-size: .9rem;
+            }
+        }
+    }
+    .shadow-right::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        height: 15px;
+        width: 50%;
+        background-image: linear-gradient(to top, rgba(26, 26, 44, 0.842), rgba(0, 0, 0, 0));
+    }
+    .shadow-left::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 0;
+        height: 15px;
+        width: 50%;
+        background-image: linear-gradient(to top, rgba(26, 26, 44, 0.842), rgba(0, 0, 0, 0));
+    }
+}
+
+
+.logout-btn {
+    background: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    transition: .4s;
+    cursor: pointer;
+    width: 200px;
+}
+
+.logout-btn:hover {
+    color: hsl(235, 24%, 19%);
+    background-image:  linear-gradient( 140deg, hsl(192, 100%, 81%), hsl(280, 87%, 65%));
+    border-color: hsl(235, 24%, 19%);
+}
