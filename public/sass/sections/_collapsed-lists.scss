@@ -1,0 +1,34 @@
+
+    .collapsed-wrap__list {
+        width: 100%;
+        height: 70px;
+        background: $very_dark_desaturated_blue;
+        border-radius: 5px;
+        @include flex_centered(row);
+        justify-content: space-between;
+        padding: 0 20px;
+
+        &-text {
+            .collapsed-wrap__list-title {
+                color: $dark_grayish_blue;
+            }
+            .date-created {
+                font-size: .7rem;
+                color: $dark_grayish_blue;
+            }
+        }
+
+        &-btns {
+            display: flex;
+            gap: 20px;
+
+            .collapsed-wrap__view-btn {
+                border: none;
+                background: none;
+                color: $dark_grayish_blue;
+                font-size: .8rem;
+                font-weight: 700;
+                cursor: pointer;
+            }
+        }
+    }

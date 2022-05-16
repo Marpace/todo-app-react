@@ -3,7 +3,6 @@
 
 function ListFooter(props){
 
-
     function handleClick(e){
         props.applyFilter(e.target.id)
     }

@@ -1,0 +1,11 @@
+.collapsed-wrap {
+    width: 100%;
+    @include flex_centered(column);
+    gap: 20px;
+
+    &__btns {
+        display: flex;
+        width: 100%;
+    }
+}
+

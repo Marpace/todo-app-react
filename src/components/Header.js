@@ -12,7 +12,7 @@ function Header(props){
 
     return (
         <div className="header">
-            <h1>TODO</h1>
+            <h1>{props.header}</h1>
             <button className={props.theme === "light" ? "show" : "hidden"} onClick={handleClick}>
                 <img 
                 src="./images/icon-moon.svg" 

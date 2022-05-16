@@ -1,6 +1,7 @@
 .wrap {
     width: 85%;
     max-width: 500px;
+    @include flex_centered(column);
 }
 
 main {
@@ -11,15 +12,23 @@ main {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .show {
-    display: block;
+    display: block !important;
 }
 
 .show-flex {
-    display: flex;
+    display: flex !important;
+}
+
+.invisible {
+    opacity: 0 !important;
+}
+
+.visible {
+    opacity: 1 !important;
 }
 
 // Dark them classes 
@@ -57,7 +66,10 @@ main {
     }
     background-color: hsl(235, 21%, 11%);
 }
-
+.button-dark {
+    border: 1px solid hsl(234, 39%, 85%);
+    color: hsl(234, 39%, 85%);
+}
 
 //Light theme classes 
 .bg-light {
@@ -94,12 +106,8 @@ main {
     }
     background-color: hsl(236, 33%, 92%);
 }
-
-
-.bottom-text {
-    margin: 50px 0; 
-    color: hsl(233, 14%, 35%); 
-    text-align: center;
-    font-size: .8rem;
+.button-light {
+    border: 1px solid $dark_grayish_blue;
+    color: $dark_grayish_blue;
 }
 
