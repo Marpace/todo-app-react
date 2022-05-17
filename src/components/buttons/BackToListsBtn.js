@@ -4,6 +4,8 @@ function BackToListsBtn(props) {
 
     function handleClick() {
         props.setSingleList(null)
+        props.setHeader("TODO")
+        props.removeSingleList()
     }
 
     return (

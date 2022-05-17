@@ -17,10 +17,17 @@ function ListsPage(props) {
     useEffect(() => {
         getTheme();
         getLists();
+        const list = JSON.parse(localStorage.getItem("list"));
+        if(list !== null) {
+            console.log(list)
+            setSingleList(list)
+            setHeader(list.title)
+        }
     }, [])
 
 
     function getLists(){
+        setLoading(true)
         fetch(`${props.base_url}/get-lists`, {
           headers: {
             Authorization: 'Bearer ' + props.token
@@ -29,6 +36,7 @@ function ListsPage(props) {
         .then(res => res.json())
         .then(data => {
             setLists(data.lists)
+            setLoading(false)
         })
         .catch(err => console.log(err));
     }
@@ -46,6 +54,7 @@ function ListsPage(props) {
         .then(data => {
             const selectedList = data.list;
             setSingleList(selectedList);
+            localStorage.setItem("list", JSON.stringify(selectedList))
             setHeader(selectedList.title.toUpperCase());
         })
         .catch(err => console.log(err))
@@ -65,9 +74,12 @@ function ListsPage(props) {
                 dateCreated: dateCreated
             })
         })
-        .then(() => {
+        .then(res => res.json())
+        .then(data => {
             console.log(`Created ${listTitle} list ${dateCreated}`)
             getLists();
+            setSingleList(data.list);
+            setHeader(data.list.title.toUpperCase());
         })
     }
 
@@ -89,12 +101,10 @@ function ListsPage(props) {
     
     
     function getTheme(){
-        setLoading(true);
         fetch(`${props.base_url}/get-theme`)
         .then(response => response.json())
         .then(data =>{
             setTheme(data.theme);
-            setLoading(false);
         });
     }
       
@@ -114,7 +124,12 @@ function ListsPage(props) {
     
 
     function renderLayout() {
-        if(singleList) {
+        if(loading) {
+            return (
+                <LoadingScreen />
+            )
+        }
+        else if(singleList) {
             return(
                 <List 
                     listId={singleList._id}
@@ -124,6 +139,7 @@ function ListsPage(props) {
                     items={singleList.listItems}
                     getLists={getLists}
                     setSingleList={setSingleList}
+                    setHeader={setHeader}
                 />
             ) 
         }

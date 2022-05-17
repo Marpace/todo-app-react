@@ -1,16 +1,16 @@
 import ListsPage from "./components/list/ListsPage"
 import Login from "./components/auth/Login"
 import {useEffect, useState} from "react"
-import { Route, useNavigate } from "react-router-dom";
 
 function App() {
 
   // const base_url = "http://localhost:5000";
-  const base_url = "https://todo-api-6215.herokuapp.com"
+  const base_url = "https://todo-api-6215.herokuapp.com";
 
-  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [registerMessage, setRegisterMessage] = useState("")
 
 
   useEffect(() => {
@@ -23,12 +23,35 @@ function App() {
       userLogout();
       return;
     }
-    const userId = localStorage.getItem('userId');
     const remainingMilliseconds = new Date(expiryDate).getTime() - new Date().getTime();
     setToken(token);
     setLoggedIn(true);
     setAutoLogout(remainingMilliseconds);
   }, []);
+
+  function registerUser(email, password){
+    fetch(`${base_url}/register`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(res =>  {
+        return res.json()
+    })
+    .then( (data) => {
+        console.log(data)
+        setRegisterMessage("Thank you for registering, please login.")
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
 
   function userLogin(email, password) {
     fetch(`${base_url}/login`, {
@@ -47,6 +70,7 @@ function App() {
     .then(data => {
         setLoggedIn(true);
         setToken(data.token);
+        setErrorMessage("")
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
         const remainingMilliseconds = 60 * 60 * 1000;
@@ -56,10 +80,14 @@ function App() {
         localStorage.setItem('expiryDate', expiryDate.toISOString());
         setAutoLogout(remainingMilliseconds);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      setErrorMessage("Please check email or password");
+      setRegisterMessage("");
+    });
   } 
 
-  function userLogout() {
+  function userLogout() { 
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("expiryDate")
@@ -73,11 +101,29 @@ function App() {
     }, milliseconds);
   };
 
+  // function forgotPassword(email) {
+  //   fetch(`${base_url}/forgot-password`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({email: email})
+  //   })
+  //   .then(res => res.json())
+  //   .then(data => {
+
+  //   })
+  // }
+
+
   function renderPage(){
     if(!loggedIn){
       return(
         <Login 
+          errorMessage={errorMessage}
+          registerMessage={registerMessage}
           handleLogin={userLogin}
+          registerUser={registerUser}
         />
         ) 
     }

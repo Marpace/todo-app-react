@@ -4,7 +4,7 @@ import ListItem from "./ListItem"
 import ItemInput from "./ItemInput";
 import ListFooter from "./ListFooter";
 import Filters from "./Filters";
-import AllListsBtn from "../buttons/BackToListsBtn";
+import BackToListsBtn from "../buttons/BackToListsBtn";
 
 function List(props){
 
@@ -27,7 +27,7 @@ function List(props){
         setItemsLeft(data.items.filter(item => item.status === "active").length)
       }
     )
-    .catch(err => console.log(err));
+    .catch(err => console.log(err)); 
   }
 
   function addItem(inputValue){
@@ -71,7 +71,9 @@ function List(props){
   .catch(err => console.log(err))
   }
 
-  
+  function removeSingleList(){
+    localStorage.removeItem("list")
+  }
   
   function updateListOrder(evt){
       fetch(`${props.base_url}/update-list-order`, {
@@ -107,64 +109,89 @@ function List(props){
     })
     .then(() => {
       console.log("Deleted completed items.")
+      getItems()
       setCurrentFilter("all")
     })
   }
 
-      
+  function renderComponent() {
+    if(items.length <= 0) {
+      return (
+        <div className="todo-list-wrap">
+          <ItemInput 
+            addItem={addItem}
+            theme={props.theme}
+          />
+          <BackToListsBtn 
+              theme={props.theme}
+              setSingleList={props.setSingleList}
+              setHeader={props.setHeader}
+              removeSingleList={removeSingleList}
+            />
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="todo-list-wrap">
+          <ItemInput 
+            addItem={addItem}
+            theme={props.theme}
+          />
+          <ReactSortable
+              className={`todo-list todo-list-${props.theme}`}
+              animation={200}
+              list={items}
+              delay={200}
+              delayOnTouchOnly={true}
+              setList={setItems}
+              onEnd={updateListOrder}
+              >
+              {items.map((item) => (
+                  <ListItem 
+                  key={item._id}
+                  id={item._id}
+                  content={item.content}
+                  theme={props.theme}
+                  status={item.status}
+                  filter={currentFilter}
+                  deleteItem={deleteItem}
+                  checkItem={checkItem}
+                  />
+              ))}
+          </ReactSortable>
+          <ListFooter 
+            theme={props.theme}
+            applyFilter={applyFilter}
+            filter={currentFilter}
+            itemsLeft={itemsLeft}
+            clearCompleted={clearCompleted}
+          />
+          <Filters 
+            theme={props.theme}
+            applyFilter={applyFilter}
+            filter={currentFilter}
+          />
+
+          
+          <div className="bottom-text">
+              <p className="bottom-text__desktop">Drag and drop to reorder list</p>
+              <p className="bottom-text__mobile">Tap and hold a list item to move it</p>
+          </div> 
+
+          <BackToListsBtn 
+            setSingleList={props.setSingleList}
+            theme={props.theme}
+            setHeader={props.setHeader}
+            removeSingleList={removeSingleList}
+          />
+        </div>
+      )
+    }
+  }
 
   return(
-    <div className="todo-list-wrap">
-      <ItemInput 
-        addItem={addItem}
-        theme={props.theme}
-      />
-      <ReactSortable
-          className={`todo-list todo-list-${props.theme}`}
-          animation={200}
-          list={items}
-          delay={200}
-          delayOnTouchOnly={true}
-          setList={setItems}
-          onEnd={updateListOrder}
-          >
-          {items.map((item) => (
-              <ListItem 
-              key={item._id}
-              id={item._id}
-              content={item.content}
-              theme={props.theme}
-              status={item.status}
-              filter={currentFilter}
-              deleteItem={deleteItem}
-              checkItem={checkItem}
-              />
-          ))}
-      </ReactSortable>
-      <ListFooter 
-        theme={props.theme}
-        applyFilter={applyFilter}
-        filter={currentFilter}
-        itemsLeft={itemsLeft}
-        clearCompleted={clearCompleted}
-      />
-      <Filters 
-        theme={props.theme}
-        applyFilter={applyFilter}
-        filter={currentFilter}
-      />
-
-      
-      <div className="bottom-text">
-          <p className="bottom-text__desktop">Drag and drop to reorder list</p>
-          <p className="bottom-text__mobile">Tap and hold a list item to move it</p>
-      </div> 
-
-      <AllListsBtn 
-        setSingleList={props.setSingleList}
-        theme={props.theme}
-      />
-    </div>
+    renderComponent()
   )
 }
 

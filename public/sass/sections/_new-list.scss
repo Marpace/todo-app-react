@@ -33,7 +33,6 @@
             border-bottom: 1px solid hsl(234, 39%, 85%);
             text-align: center;
             font-size: 1.2rem;
-            color: hsl(234, 39%, 85%);
         }
         input:focus {
             outline: none;
@@ -45,6 +44,12 @@
 
             button {
                 width: 100px;
+
+                &:hover {
+                    color: hsl(235, 24%, 19%);
+                    background-image:  linear-gradient( 140deg, hsl(192, 100%, 81%), hsl(280, 87%, 65%));
+                    border-color: hsl(235, 24%, 19%);
+                }
             }
         }
     }

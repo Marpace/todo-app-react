@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 
 function Login(props){
 
-    let navigate = useNavigate();
 
     const base_url = "http://localhost:5000";
   // const base_url = "https://todo-api-6215.herokuapp.com"
 
-    const [loggedIn, setLoggedIn] = useState(false);
 
     //States for animation
     const [bodyShadow, setBodyShadow] = useState("shadow-right");
@@ -93,42 +90,24 @@ function Login(props){
     }
 
     function registerUser(e){
-        e.preventDefault();
-        fetch(`${base_url}/register`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: registerEmailValue,
-                password: registerPasswordValue
-            })
-        })
-        .then(res =>  {
-            return res.json()
-        })
-        .then( (data) => {
-            console.log(data)
-          setRegisterEmailValue("");
-          setRegisterPasswordValue("");
-          setConfirmPasswordValue("");
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
+        const email = registerEmailValue;
+        const password = registerPasswordValue;
 
+        e.preventDefault();
+        props.registerUser(email, password);
+
+        setRegisterEmailValue("");
+        setRegisterPasswordValue("");
+        setConfirmPasswordValue("");
+
+        handleLoginClick();
+    }
+    
     function handleLogin(e) {
         e.preventDefault();
         props.handleLogin(loginEmailValue, loginPasswordValue);
     }
     
-
-    function userLogout() {
-        setLoggedIn(false)
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-    }
 
     return (
         <div className="login">
@@ -150,16 +129,22 @@ function Login(props){
                         onChange={handleLoginEmailInputChange} 
                         type="email"  
                         placeholder="Email" 
-                        value={loginEmailValue}></input>
+                        value={loginEmailValue}
+                        required>
+                        </input>
                         <input 
                         onChange={handleLoginPasswordInputChange}
                         type="password"  
                         placeholder="Password" 
-                        value={loginPasswordValue}></input>
+                        value={loginPasswordValue}
+                        required>
+                        </input>
                     </div>
+                    <p className="error-msg">{props.errorMessage}</p>
+                    <p className="register-msg">{props.registerMessage}</p>
                     <button type="submit">Login</button>
                 </form>
-                <button className={`forgotPassword ${visibility}`}>Forgot password</button>
+                {/* <button className={`forgotPassword ${visibility}`}>Forgot password</button> */}
                 <form onSubmit={registerUser}  className={`form register-form ${registerForm}`}>
                     <div className="form-inputs">
                         <input 
@@ -189,6 +174,7 @@ function Login(props){
                     <button type="submit">Register</button>
                 </form>
             </div>
+            <div></div>
         </div>
     )
 };

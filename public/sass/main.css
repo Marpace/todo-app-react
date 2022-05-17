@@ -323,6 +323,10 @@ body, button, input {
   cursor: pointer;
 }
 
+.todo-list__footer .clear-completed-btn:hover {
+  color: #d2d3db;
+}
+
 .todo-list__footer:last-child {
   border-radius: 0 0 5px 5px;
 }
@@ -351,6 +355,10 @@ body, button, input {
   font-weight: 700;
   cursor: pointer;
   user-select: none;
+}
+
+.filter .filter-option:hover {
+  color: #d2d3db;
 }
 
 .filter .filter-active {
@@ -538,15 +546,6 @@ body, button, input {
   box-shadow: 0px 15px 17px -12px #141414;
 }
 
-.login__body .forgotPassword {
-  color: #cacde8;
-  font-size: .9rem;
-  text-decoration: underline;
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
 .login__body .form {
   position: absolute;
   top: 20%;
@@ -557,6 +556,10 @@ body, button, input {
   height: 60%;
   width: 100%;
   transition: .2s;
+}
+
+.login__body .form .error-msg, .login__body .form .register-msg {
+  color: #d2d3db;
 }
 
 .login__body .form button {
@@ -625,6 +628,15 @@ body, button, input {
   top: 190px;
   left: 20px;
   font-size: .9rem;
+}
+
+.login__body .forgotPassword {
+  color: #cacde8;
+  font-size: .9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .login .shadow-right::before {
@@ -705,7 +717,6 @@ body, button, input {
   border-bottom: 1px solid #cacde8;
   text-align: center;
   font-size: 1.2rem;
-  color: #cacde8;
 }
 
 .create-list .new-list-form input:focus {
@@ -719,6 +730,12 @@ body, button, input {
 
 .create-list .new-list-form-btns button {
   width: 100px;
+}
+
+.create-list .new-list-form-btns button:hover {
+  color: #25273c;
+  background-image: linear-gradient(140deg, #9eecff, #c058f3);
+  border-color: #25273c;
 }
 
 .collapsed-wrap {

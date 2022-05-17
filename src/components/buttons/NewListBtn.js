@@ -27,6 +27,7 @@ function NewListBtn(props){
             <button onClick={handleClick} className={`new-list-btn ${buttonVisibility} button-${props.theme}`}>New list</button>
             <form onSubmit={handleSubmit} className={`new-list-form ${formVisibility}`}>
                 <input 
+                    className={`text-${props.theme}`}
                     onChange={handleChange} 
                     type="text" 
                     placeholder="Title" 
@@ -34,8 +35,8 @@ function NewListBtn(props){
                     autoFocus
                 ></input>
                 <div className="new-list-form-btns">                   
-                    <button type="submit">Create</button>
-                    <button onClick={handleClick} type="button">Cancel</button>
+                    <button className={`button-${props.theme}`} type="submit">Create</button>
+                    <button className={`button-${props.theme}`} onClick={handleClick} type="button">Cancel</button>
                 </div>
             </form>
         </div>
