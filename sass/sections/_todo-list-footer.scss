@@ -33,6 +33,10 @@
         font-size: .8rem;
         color: $dark_grayish_blue;
         cursor: pointer;
+
+        &:hover {
+            color: $light_grayish_blue;
+        }
     }
 }
 .todo-list__footer:last-child {
