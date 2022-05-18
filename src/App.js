@@ -4,8 +4,8 @@ import {useEffect, useState} from "react"
 
 function App() {
 
-  const base_url = "http://localhost:5000";
-  // const base_url = "https://todo-api-6215.herokuapp.com";
+  // const base_url = "http://localhost:5000";
+  const base_url = "https://todo-api-6215.herokuapp.com";
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
