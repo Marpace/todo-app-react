@@ -1,0 +1,45 @@
+.delete-list-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(3px);
+    @include flex_centered(row);
+
+    &__body {
+        height: 200px;
+        width: 90%;
+        max-width: 330px;
+        border-radius: 10px;
+        background-color: $very_light_gray;
+        @include flex_centered(column);
+        gap: 50px;
+        align-items: flex-start;
+        padding: 0 40px;
+
+        .delete-modal-text {
+            font-size: 1.4rem;
+            color: $very_dark_desaturated_blue;
+        }
+        .delete-list-modal__btns {
+            width: 100%;
+            @include flex_centered(row);
+            justify-content: space-between;
+
+            .delete-modal__button {
+                background: none;
+                border-radius: 5px;
+                padding: 10px 30px;
+                font-size: 1rem;
+                transition: .4s;
+                cursor: pointer;
+                color: $very_dark_desaturated_blue;
+                border: 1px solid $very_dark_desaturated_blue;
+            }
+        }
+
+    }
+
+
+}

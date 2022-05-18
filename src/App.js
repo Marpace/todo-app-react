@@ -4,8 +4,8 @@ import {useEffect, useState} from "react"
 
 function App() {
 
-  // const base_url = "http://localhost:5000";
-  const base_url = "https://todo-api-6215.herokuapp.com";
+  const base_url = "http://localhost:5000";
+  // const base_url = "https://todo-api-6215.herokuapp.com";
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
@@ -46,12 +46,26 @@ function App() {
     .then( (data) => {
         console.log(data)
         setRegisterMessage("Thank you for registering, please login.")
+        setErrorMessage("")
     })
     .catch(err => {
         console.log(err);
     })
-}
+  }
 
+  function deleteUser() {
+    fetch(`${base_url}/delete-user`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      }
+    })
+    .then(() => {
+      console.log("User deleted");
+      userLogout();
+    })
+  }
 
   function userLogin(email, password) {
     fetch(`${base_url}/login`, {
@@ -132,6 +146,7 @@ function App() {
           base_url={base_url}
           token={token}
           onLogout={userLogout}
+          deleteUser={deleteUser}
         />
     )
   }

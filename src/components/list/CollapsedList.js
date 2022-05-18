@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import DeleteListModal from "../modals/DeleteListModal";
 
 function CollapsedList(props){
-
+    
+    const [deleteListModal, setDeleteListModal] = useState("hidden")
+    
+    
     function handleView(){
         props.getSingleList(props.listId)
     }
 
     function handleDelete() {
-        props.deleteList(props.listId)
+        props.deleteList(props.listId);
     }
+
+
+    function handleModal() {
+        setDeleteListModal("show-flex")
+    }
+
 
     return (
         <div className={`collapsed-wrap__list bg-${props.theme}`}>
@@ -18,8 +28,15 @@ function CollapsedList(props){
             </div>
             <div className="collapsed-wrap__list-btns">
                 <button onClick={handleView} className="collapsed-wrap__view-btn">View</button>
-                <button onClick={handleDelete} className="collapsed-wrap__view-btn">Delete</button>
+                <button onClick={handleModal} className="collapsed-wrap__view-btn">Delete</button>
             </div>
+            <DeleteListModal 
+                modal={deleteListModal}
+                listTitle={props.listTitle}
+                listId={props.lidtId}
+                deleteList={handleDelete}
+                setDeleteListModal={setDeleteListModal}
+            />
         </div>          
     );
 }

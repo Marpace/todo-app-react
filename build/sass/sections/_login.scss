@@ -104,14 +104,6 @@
         transition: .2s;
         box-shadow: 0px 15px 17px -12px rgb(20, 20, 20);
 
-        .forgotPassword {
-            color: hsl(234, 39%, 85%);
-            font-size: .9rem;
-            text-decoration: underline;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
         .form {
             position: absolute;
             top: 20%;
@@ -123,6 +115,9 @@
             width: 100%;
             transition: .2s;
 
+            .error-msg, .register-msg {
+                color: $light_grayish_blue;
+            }
             button {
                 background: none;
                 border: 1px solid hsl(234, 39%, 85%);
@@ -183,6 +178,14 @@
                 left: 20px;
                 font-size: .9rem;
             }
+        }
+        .forgotPassword {
+            color: hsl(234, 39%, 85%);
+            font-size: .9rem;
+            text-decoration: underline;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
     }
     .shadow-right::before {

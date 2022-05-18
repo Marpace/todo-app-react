@@ -3,16 +3,22 @@
 @import "base/reset";
 @import "base/typography";
 
-@import "sections/header";
-@import "sections/collapsed-lists";
-@import "sections/input-form";
-@import "sections/todo-list";
-@import "sections/todo-list-item";
-@import "sections/todo-list-footer";
-@import "sections/filter";
-@import "sections/loading-screen";
-@import "sections/bottom-text";
-@import "sections/login";
-@import "sections/new-list";
-@import "sections/list-page";
-@import "sections/main";
+@import "lists-page/header";
+@import "lists-page/filter";
+@import "lists-page/bottom-text";
+@import "lists-page/list-page";
+
+@import "lists-page/list/collapsed-lists";
+@import "lists-page/list/input-form";
+@import "lists-page/list/todo-list";
+@import "lists-page/list/todo-list-item";
+@import "lists-page/list/todo-list-footer";
+@import "lists-page/list/loading-screen";
+@import "lists-page/list/new-list-form";
+
+@import "lists-page/modals/delete-list-modal";
+@import "lists-page/modals/delete-account-modal";
+
+@import "auth/login";
+
+@import "base/main";

@@ -8,8 +8,6 @@ function Header(props){
         props.changeTheme(theme);
     }
 
-
-
     return (
         <div className="header">
             <h1>{props.header}</h1>

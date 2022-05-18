@@ -5,6 +5,8 @@ import List from "./List";
 import LogoutBtn from "../buttons/LogoutBtn"
 import LoadingScreen from "../loadingScreen"
 import CollapsedList from "./CollapsedList";
+import DeleteAccountBtn from "../buttons/DeleteAccountBtn";
+import DeleteAccountModal from "../modals/DeleteAccountModal";
 
 function ListsPage(props) {
 
@@ -12,7 +14,9 @@ function ListsPage(props) {
     const [singleList, setSingleList] = useState(null);
     const [theme, setTheme] = useState("");
     const [loading, setLoading] = useState(false);
-    const [header, setHeader] = useState("TODO")
+    const [header, setHeader] = useState("TODO");
+    const [deleteAccountModal, setDeleteAccountModal] = useState("hidden");
+
 
     useEffect(() => {
         getTheme();
@@ -94,17 +98,22 @@ function ListsPage(props) {
         })
         .then(() => {
           getLists();
-          console.log("Deleted list")
+          console.log("Deleted list");
         })
         .catch(err => console.log(err))
       }
     
     
     function getTheme(){
-        fetch(`${props.base_url}/get-theme`)
+        fetch(`${props.base_url}/get-theme`, {
+            headers: {
+                Authorization: "Bearer " + props.token
+            }
+        })
         .then(response => response.json())
         .then(data =>{
             setTheme(data.theme);
+            console.log(data.theme)
         });
     }
       
@@ -112,7 +121,8 @@ function ListsPage(props) {
         fetch(`${props.base_url}/set-theme`, {
             method: "POST",
             headers: {
-            "Content-Type": "application/json"
+                Authorization: "Bearer " + props.token,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({theme: theme})
         })
@@ -164,6 +174,15 @@ function ListsPage(props) {
                     theme={theme}
                     onLogout={props.onLogout}
                 />   
+                <DeleteAccountBtn 
+                    setModal={setDeleteAccountModal}
+                    theme={theme}
+                /> 
+                <DeleteAccountModal 
+                    deleteUser={props.deleteUser}
+                    modal={deleteAccountModal}
+                    setModal={setDeleteAccountModal}
+                />
             </div>
         )
     }

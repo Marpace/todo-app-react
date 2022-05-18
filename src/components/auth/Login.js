@@ -3,18 +3,15 @@ import React, { useState } from "react";
 
 function Login(props){
 
-
-    const base_url = "http://localhost:5000";
-  // const base_url = "https://todo-api-6215.herokuapp.com"
-
-
     //States for animation
     const [bodyShadow, setBodyShadow] = useState("shadow-right");
     const [login, setLogin] = useState("front");
     const [register, setRegister] = useState("back");
     const [loginForm, setLoginForm] = useState("form-flex");
     const [registerForm, setRegisterForm] = useState("form-hidden");
-    const [visibility, setVisibility] =  useState("form-flex");
+
+    // this is for the forgot password button
+    // const [visibility, setVisibility] =  useState("form-flex");
 
     const [passwordMatch, setPasswordMatch] = useState("no-match")
     const [labelText, setLabelText] = useState("Passwords do not match");
@@ -72,7 +69,7 @@ function Login(props){
         setLogin("front");
         setLoginForm("form-flex");
         setRegisterForm("form-hidden")
-        setVisibility("form-flex")
+        // setVisibility("form-flex")
         setTimeout(() => {
             setBodyShadow("shadow-right");
             setRegister("back");
@@ -82,7 +79,7 @@ function Login(props){
         setRegister("front");
         setLoginForm("form-hidden");
         setRegisterForm("form-flex")
-        setVisibility("form-hidden")
+        // setVisibility("form-hidden")
         setTimeout(() => {
             setBodyShadow("shadow-left");
             setLogin("back");
@@ -99,6 +96,9 @@ function Login(props){
         setRegisterEmailValue("");
         setRegisterPasswordValue("");
         setConfirmPasswordValue("");
+
+        setLoginEmailValue("");
+        setLoginPasswordValue("");
 
         handleLoginClick();
     }
