@@ -13,7 +13,7 @@ function ListsPage(props) {
     const [lists, setLists] = useState([]);
     const [singleList, setSingleList] = useState(null);
     const [theme, setTheme] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [header, setHeader] = useState("TODO");
     const [deleteAccountModal, setDeleteAccountModal] = useState("hidden");
 
@@ -153,7 +153,7 @@ function ListsPage(props) {
                 />
             ) 
         }
-        return (
+        else return (
             <div className={`collapsed-wrap`}>
                 {lists.map((list) => (
                     <CollapsedList 
@@ -189,6 +189,7 @@ function ListsPage(props) {
 
     return (
         <main className={`main-${theme}`}>
+            <div className={`bg-img bg-image-${theme}`}></div>
             <div className="wrap">
                 <Header 
                     header={header}

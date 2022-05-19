@@ -34,6 +34,7 @@ function List(props){
     fetch(`${props.base_url}/add-item`, {
         method: "POST",
         headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("token"),
           "Content-Type": "application/json"
         },
         body: JSON.stringify({content: inputValue, status: "active", listId: props.listId})
@@ -48,7 +49,8 @@ function List(props){
     fetch(`${props.base_url}/delete-item`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+          Authorization: 'Bearer ' + localStorage.getItem("token"),
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({itemId: id, listId: props.listId})
     })
@@ -63,7 +65,8 @@ function List(props){
     fetch(`${props.base_url}/check-item`, {
       method: "POST",
       headers: {
-          "Content-Type": "application/json"
+        Authorization: 'Bearer ' + localStorage.getItem("token"),
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({itemId: itemId, status: status, listId: props.listId})
   })
@@ -79,6 +82,7 @@ function List(props){
       fetch(`${props.base_url}/update-list-order`, {
         method: "POST",
         headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("token"),
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -102,6 +106,7 @@ function List(props){
     fetch(`${props.base_url}/clear-completed`, {
       method: "POST",
       headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("token"),
         "Content-Type": "application/json"
       },
       body: JSON.stringify({listId: props.listId})

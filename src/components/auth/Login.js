@@ -7,8 +7,8 @@ function Login(props){
     const [bodyShadow, setBodyShadow] = useState("shadow-right");
     const [login, setLogin] = useState("front");
     const [register, setRegister] = useState("back");
-    const [loginForm, setLoginForm] = useState("form-flex");
-    const [registerForm, setRegisterForm] = useState("form-hidden");
+    const [loginForm, setLoginForm] = useState("show-flex");
+    const [registerForm, setRegisterForm] = useState("hidden");
 
     // this is for the forgot password button
     // const [visibility, setVisibility] =  useState("form-flex");
@@ -67,8 +67,8 @@ function Login(props){
     // Animate change from login to register
     function handleLoginClick(){
         setLogin("front");
-        setLoginForm("form-flex");
-        setRegisterForm("form-hidden")
+        setLoginForm("show-flex");
+        setRegisterForm("hidden")
         // setVisibility("form-flex")
         setTimeout(() => {
             setBodyShadow("shadow-right");
@@ -77,8 +77,8 @@ function Login(props){
     }
     function handleRegisterClick(){
         setRegister("front");
-        setLoginForm("form-hidden");
-        setRegisterForm("form-flex")
+        setLoginForm("hidden");
+        setRegisterForm("show-flex")
         // setVisibility("form-hidden")
         setTimeout(() => {
             setBodyShadow("shadow-left");
@@ -123,7 +123,7 @@ function Login(props){
                 </div>
             </div>
             <div className={`login__body ${bodyShadow}`}>
-                <form onSubmit={handleLogin} className={`form ${loginForm}`}>
+                <form onSubmit={handleLogin} className={`login-form ${loginForm}`}>
                     <div className="form-inputs">
                         <input 
                         onChange={handleLoginEmailInputChange} 
@@ -145,11 +145,11 @@ function Login(props){
                     <button type="submit">Login</button>
                 </form>
                 {/* <button className={`forgotPassword ${visibility}`}>Forgot password</button> */}
-                <form onSubmit={registerUser}  className={`form register-form ${registerForm}`}>
+                <form onSubmit={registerUser}  className={`register-form ${registerForm}`}>
                     <div className="form-inputs">
                         <input 
                         onChange={handleRegisterEmailInputChange} 
-                        type="text"  
+                        type="email"  
                         placeholder="Email" 
                         value={registerEmailValue}></input>
                         <input 

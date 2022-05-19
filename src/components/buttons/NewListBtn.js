@@ -34,6 +34,13 @@ function NewListBtn(props){
                     value={titleInputValue}
                     autoFocus
                 ></input>
+                {/* <input 
+                    className={`text-${props.theme}`}
+                    onChange={handleChange} 
+                    type="date" 
+                    placeholder="Deadline" 
+                    value={titleInputValue}
+                ></input> */}
                 <div className="new-list-form-btns">                   
                     <button className={`button-${props.theme}`} type="submit">Create</button>
                     <button className={`button-${props.theme}`} onClick={handleClick} type="button">Cancel</button>

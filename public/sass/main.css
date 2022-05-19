@@ -644,7 +644,6 @@ body, button, input {
 .login {
   height: 100vh;
   width: 100vw;
-  position: fixed;
   top: 0;
   left: 0;
   background-image: linear-gradient(140deg, #9eecff, #c058f3);
@@ -759,23 +758,23 @@ body, button, input {
   box-shadow: 0px 15px 17px -12px #141414;
 }
 
-.login__body .form {
+.login__body .login-form, .login__body .register-form {
   position: absolute;
   top: 20%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 25px;
   align-items: center;
   height: 60%;
   width: 100%;
   transition: .2s;
 }
 
-.login__body .form .error-msg, .login__body .form .register-msg {
+.login__body .login-form .error-msg, .login__body .login-form .register-msg, .login__body .register-form .error-msg, .login__body .register-form .register-msg {
   color: #d2d3db;
 }
 
-.login__body .form button {
+.login__body .login-form button, .login__body .register-form button {
   background: none;
   border: 1px solid #cacde8;
   border-radius: 5px;
@@ -787,22 +786,13 @@ body, button, input {
   width: 200px;
 }
 
-.login__body .form button:hover {
+.login__body .login-form button:hover, .login__body .register-form button:hover {
   color: #25273c;
   background-image: linear-gradient(140deg, #9eecff, #c058f3);
 }
 
-.login__body .form-hidden {
-  display: none;
-}
-
-.login__body .form-flex {
-  display: flex;
-}
-
 .login__body .register-form {
-  height: 75%;
-  padding-bottom: 20px;
+  gap: 50px;
 }
 
 .login__body .form-inputs {
@@ -872,17 +862,8 @@ body, button, input {
   background-image: linear-gradient(to top, rgba(26, 26, 44, 0.842), rgba(0, 0, 0, 0));
 }
 
-.wrap {
-  width: 85%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 main {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -891,6 +872,28 @@ main {
   justify-content: flex-start;
   padding-bottom: 100px;
   width: 100%;
+  height: 100vh;
+}
+
+main .bg-img {
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 10;
+}
+
+main .wrap {
+  width: 85%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  z-index: 20;
 }
 
 .hidden {
@@ -944,17 +947,18 @@ main {
   border: 1px solid #393a4c;
 }
 
-.main-dark {
-  background-size: 100%;
-  background-repeat: no-repeat;
+.bg-image-dark {
   background-image: url("../images/bg-mobile-dark.jpg");
-  background-color: #161722;
 }
 
 @media only screen and (min-width: 992px) {
-  .main-dark {
+  .bg-image-dark {
     background-image: url("../images/bg-desktop-dark.jpg");
   }
+}
+
+.main-dark {
+  background-color: #161722;
 }
 
 .button-dark {
@@ -993,17 +997,18 @@ main {
   border: 1px solid #d2d3db;
 }
 
-.main-light {
-  background-size: 100%;
-  background-repeat: no-repeat;
+.bg-image-light {
   background-image: url("../images/bg-mobile-light.jpg");
-  background-color: #e4e5f1;
 }
 
 @media only screen and (min-width: 992px) {
-  .main-light {
+  .bg-image-light {
     background-image: url("../images/bg-desktop-light.jpg");
   }
+}
+
+.main-light {
+  background-color: #e4e5f1;
 }
 
 .button-light {

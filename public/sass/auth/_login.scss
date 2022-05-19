@@ -1,7 +1,7 @@
 .login {
     height: 100vh;
     width: 100vw;
-    position: fixed;
+    // position: fixed;
     top: 0;
     left: 0;
     background-image:  linear-gradient( 140deg, hsl(192, 100%, 81%), hsl(280, 87%, 65%));
@@ -104,12 +104,12 @@
         transition: .2s;
         box-shadow: 0px 15px 17px -12px rgb(20, 20, 20);
 
-        .form {
+        .login-form, .register-form {
             position: absolute;
             top: 20%;
             display: flex;
             flex-direction: column;
-            justify-content:space-between;
+            gap: 25px;
             align-items: center;
             height: 60%;
             width: 100%;
@@ -134,17 +134,9 @@
                     background-image:  linear-gradient( 140deg, hsl(192, 100%, 81%), hsl(280, 87%, 65%));
                 }
             }
-
-            &-hidden {
-                display: none;
-            }
-            &-flex {
-                display: flex;
-            }
         }
         .register-form {
-            height: 75%;
-            padding-bottom: 20px;
+            gap: 50px;
         }
         .form-inputs {
             display: flex;
