@@ -1,6 +1,5 @@
 {
   "name": "todo-app",
-  "homepage": "https://marpace.github.io/todo-app-react/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

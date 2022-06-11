@@ -1,6 +1,7 @@
 .create-list {
     @include flex_centered(column);
     width: 100%;
+    margin-top: 50px;
  
     .new-list-btn, .new-list-form button {
         background: none;

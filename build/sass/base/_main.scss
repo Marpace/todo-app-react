@@ -1,14 +1,27 @@
-.wrap {
-    width: 85%;
-    max-width: 500px;
-    @include flex_centered(column);
-}
 
 main {
+    position: relative;
     @include flex_centered(column);
     justify-content: flex-start;
     padding-bottom: 100px;
     width: 100%;
+    height: 100vh;
+
+    .bg-img {
+        height: 200px; 
+        width: 100%; 
+        position: absolute;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 10;
+    }
+    .wrap {
+        width: 85%;
+        max-width: 500px;
+        @include flex_centered(column);
+        gap: 30px;
+        z-index: 20;
+    }
 }
 
 .hidden {
@@ -57,13 +70,13 @@ main {
 .border-dark {
     border: 1px solid hsl(237, 14%, 26%);
 }
-.main-dark {
-    background-size: 100%;
-    background-repeat: no-repeat;
+.bg-image-dark {
     background-image: url("../images/bg-mobile-dark.jpg");
     @include responsive($tablet_large){
         background-image: url("../images/bg-desktop-dark.jpg");
     }
+}
+.main-dark {
     background-color: hsl(235, 21%, 11%);
 }
 .button-dark {
@@ -97,13 +110,13 @@ main {
 .border-light {
     border: 1px solid hsl(233, 11%, 84%);
 }
-.main-light {
-    background-size: 100%;
-    background-repeat: no-repeat;
+.bg-image-light {
     background-image: url("../images/bg-mobile-light.jpg");
     @include responsive($tablet_large){
         background-image: url("../images/bg-desktop-light.jpg");
     }
+}
+.main-light {
     background-color: hsl(236, 33%, 92%);
 }
 .button-light {
