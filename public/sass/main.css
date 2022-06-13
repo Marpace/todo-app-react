@@ -643,7 +643,7 @@ body, button, input {
 }
 
 .login {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   top: 0;
   left: 0;
