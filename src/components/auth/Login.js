@@ -142,7 +142,7 @@ function Login(props){
                     </div>
                     <p className="error-msg">{props.errorMessage}</p>
                     <p className="register-msg">{props.registerMessage}</p>
-                    <button type="submit">Login</button>
+                    <button className={`login-button ${props.loading ? "loading-button" : ""}`} type="submit">{props.loading ? "" : "Login"}</button>
                 </form>
                 {/* <button className={`forgotPassword ${visibility}`}>Forgot password</button> */}
                 <form onSubmit={registerUser}  className={`register-form ${registerForm}`}>

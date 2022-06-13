@@ -11,6 +11,7 @@ function App() {
   const [token, setToken] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [registerMessage, setRegisterMessage] = useState("")
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -68,6 +69,7 @@ function App() {
   }
 
   function userLogin(email, password) {
+    setLoading(true);
     fetch(`${base_url}/login`, {
         method: "POST",
         headers: {
@@ -79,7 +81,7 @@ function App() {
         })
     })
     .then(res => {
-        return res.json()
+      return res.json()
     })
     .then(data => {
         setLoggedIn(true);
@@ -90,9 +92,10 @@ function App() {
         const remainingMilliseconds = 60 * 60 * 1000;
         const expiryDate = new Date(
           new Date().getTime() + remainingMilliseconds
-        );
-        localStorage.setItem('expiryDate', expiryDate.toISOString());
-        setAutoLogout(remainingMilliseconds);
+          );
+          localStorage.setItem('expiryDate', expiryDate.toISOString());
+          setAutoLogout(remainingMilliseconds);
+          setLoading(false);
     })
     .catch(err => {
       console.log(err);
@@ -136,6 +139,7 @@ function App() {
         <Login 
           errorMessage={errorMessage}
           registerMessage={registerMessage}
+          loading={loading}
           handleLogin={userLogin}
           registerUser={registerUser}
         />
