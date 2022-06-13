@@ -128,11 +128,34 @@
                 transition: .4s;
                 cursor: pointer;
                 width: 200px;
+                position: relative;
 
                 &:hover {
                     color: hsl(235, 24%, 19%);
                     background-image:  linear-gradient( 140deg, hsl(192, 100%, 81%), hsl(280, 87%, 65%));
                 }
+
+            }
+            .login-button {
+                height: 42px;
+            }
+            .loading-button::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                height: 20px;
+                width: 20px;
+                border-top: 2px solid hsl(192, 100%, 81%);
+                border-bottom: 2px solid hsl(280, 87%, 65%);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                animation: spin 1.5s linear infinite;
+                
+            }
+            @keyframes spin {
+                0% {transform: translate(-50%, -50%) rotate(0deg)}
+                100% {transform: translate(-50%, -50%) rotate(360deg)}
             }
         }
         .register-form {
