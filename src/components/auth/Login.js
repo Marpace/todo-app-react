@@ -23,6 +23,7 @@ function Login(props){
     const [registerPasswordValue, setRegisterPasswordValue] = useState("");
     const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
+
     //Set input values 
     function handleLoginEmailInputChange(e){
         setLoginEmailValue(e.target.value);
@@ -64,7 +65,7 @@ function Login(props){
         setLabelVisibility("visible");
     }
 
-    // Animate change from login to register
+    // Animates change from login to register
     function handleLoginClick(){
         setLogin("front");
         setLoginForm("show-flex");
@@ -75,8 +76,14 @@ function Login(props){
             setRegister("back");
         }, 200);
     }
+    
+    // Animates change from register to login
     function handleRegisterClick(){
+        setLoginEmailValue("");
+        setLoginPasswordValue("");
+
         setRegister("front");
+        
         setLoginForm("hidden");
         setRegisterForm("show-flex")
         // setVisibility("form-hidden")
@@ -87,27 +94,23 @@ function Login(props){
     }
 
     function registerUser(e){
+        e.preventDefault();
         const email = registerEmailValue;
         const password = registerPasswordValue;
 
-        e.preventDefault();
         props.registerUser(email, password);
 
-        setRegisterEmailValue("");
-        setRegisterPasswordValue("");
-        setConfirmPasswordValue("");
-
-        setLoginEmailValue("");
-        setLoginPasswordValue("");
-
-        handleLoginClick();
+        if(props.errorMessage === "") {
+            setRegisterEmailValue("");
+            setRegisterPasswordValue("");
+            setConfirmPasswordValue("");
+        }
     }
     
     function handleLogin(e) {
         e.preventDefault();
         props.handleLogin(loginEmailValue, loginPasswordValue);
     }
-    
 
     return (
         <div className="login">
@@ -140,7 +143,6 @@ function Login(props){
                         required>
                         </input>
                     </div>
-                    <p className="error-msg">{props.errorMessage}</p>
                     <p className="register-msg">{props.registerMessage}</p>
                     <button className={`login-button ${props.loading ? "loading-button" : ""}`} type="submit">{props.loading ? "" : "Login"}</button>
                 </form>
@@ -151,12 +153,14 @@ function Login(props){
                         onChange={handleRegisterEmailInputChange} 
                         type="email"  
                         placeholder="Email" 
-                        value={registerEmailValue}></input>
+                        value={registerEmailValue}
+                        required></input>
                         <input 
                         onChange={handleRegisterPasswordInputChange} 
                         type="password"  
                         placeholder="Password" 
-                        value={registerPasswordValue}></input>
+                        value={registerPasswordValue}
+                        required></input>
                         <input 
                         name="confirmPassword" 
                         onChange={handleConfirmPasswordInputChange} 
@@ -165,7 +169,7 @@ function Login(props){
                         type="password"  
                         placeholder="Confirm password"
                         value={confirmPasswordValue}
-                        ></input>
+                        required></input>
                         <label 
                         htmlFor="confirmPasswrod"
                         className={`${labelVisibility} ${passwordMatch}`}
@@ -173,6 +177,7 @@ function Login(props){
                     </div>
                     <button type="submit">Register</button>
                 </form>
+                    <p className="error-msg">{props.errorMessage}</p>
             </div>
             <div></div>
         </div>

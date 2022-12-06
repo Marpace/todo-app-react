@@ -115,9 +115,6 @@
             width: 100%;
             transition: .2s;
 
-            .error-msg, .register-msg {
-                color: $light_grayish_blue;
-            }
             button {
                 background: none;
                 border: 1px solid hsl(234, 39%, 85%);
@@ -193,6 +190,9 @@
                 left: 20px;
                 font-size: .9rem;
             }
+        }
+        .error-msg {
+            color: rgb(212, 129, 129);
         }
         .forgotPassword {
             color: hsl(234, 39%, 85%);

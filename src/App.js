@@ -5,13 +5,14 @@ import {useEffect, useState} from "react"
 function App() {
 
   // const base_url = "http://localhost:5000";
-  const base_url = "https://todo-api-6215.herokuapp.com";
+  const base_url = "https://byzantium-moose-gear.cyclic.app";
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const [registerMessage, setRegisterMessage] = useState("")
+  const [registerMessage, setRegisterMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [registerSuccess, setRegisterSuccess] = useState(false);
 
 
   useEffect(() => {
@@ -30,29 +31,62 @@ function App() {
     setAutoLogout(remainingMilliseconds);
   }, []);
 
-  function registerUser(email, password){
-    fetch(`${base_url}/register`, {
-        method: "PUT",
+
+  async function registerUser(email, password) {
+
+    try {
+      const response = await fetch(`${base_url}/register`, {
+        method: "POST",
         headers: {
-            "Content-Type": "application/json"
+          "Content-Type": "Application/json"
         },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    })
-    .then(res =>  {
-        return res.json()
-    })
-    .then( (data) => {
-        console.log(data)
-        setRegisterMessage("Thank you for registering, please login.")
-        setErrorMessage("")
-    })
-    .catch(err => {
-        console.log(err);
-    })
+        body: JSON.stringify({email: email, password: password})
+      })
+  
+      const data = await response.json()
+      
+      if(response.status !== 200) {
+        setRegisterSuccess(false)
+        throw new Error(data.message)
+      } else {
+        setRegisterSuccess(true)
+      }
+    } catch (err) {
+      console.log(err)
+      setErrorMessage(err.message)
+    }
+
+
+
   }
+
+  // function registerUser(email, password){
+  //   fetch(`${base_url}/register`, {
+  //       method: "POST",
+  //       headers: {
+  //           "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //           email: email,
+  //           password: password
+  //       })
+  //   })
+  //   .then(res =>  {
+  //     if(res.status !== 200) {
+  //       throw new Error('Could not create user')
+  //     }
+  //     return res.json()
+  //   })
+  //   .then( (data) => {
+  //       console.log(data)
+  //       setRegisterMessage("Thank you for registering, please login.")
+  //       setErrorMessage("")
+  //     })
+  //     .catch(err => {
+  //       setErrorMessage(err.message)
+  //       console.log(err);
+  //   })
+  // }
 
   function deleteUser() {
     fetch(`${base_url}/delete-user`, {
@@ -140,6 +174,7 @@ function App() {
           errorMessage={errorMessage}
           registerMessage={registerMessage}
           loading={loading}
+          registerSuccess={registerSuccess}
           handleLogin={userLogin}
           registerUser={registerUser}
         />
