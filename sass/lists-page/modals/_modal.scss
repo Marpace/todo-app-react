@@ -6,6 +6,7 @@
     width: 100vw;
     backdrop-filter: blur(3px);
     @include flex_centered(row);
+    z-index: 100;
 
     &__body {
         height: 200px;

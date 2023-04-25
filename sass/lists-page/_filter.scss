@@ -15,8 +15,10 @@
         cursor: pointer;
         user-select: none;
 
-        &:hover {
-            color: $light_grayish_blue;
+        @include responsive($desktop) {
+            &:hover {
+                color: $light_grayish_blue;
+            }
         }
     }
     .filter-active {

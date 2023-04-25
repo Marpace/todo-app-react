@@ -13,6 +13,7 @@ main {
         position: absolute;
         background-size: cover;
         background-repeat: no-repeat;
+        background-position: center;
         z-index: 10;
     }
     .wrap {
@@ -71,10 +72,10 @@ main {
     border: 1px solid hsl(237, 14%, 26%);
 }
 .bg-image-dark {
-    background-image: url("../images/bg-mobile-dark.jpg");
-    @include responsive($tablet_large){
-        background-image: url("../images/bg-desktop-dark.jpg");
-    }
+    background-image: url("../images/mobile-bg-dark.jpg");
+    // @include responsive($tablet_large){
+    //     background-image: url("../images/bg-desktop-dark.jpg");
+    // }
 }
 .main-dark {
     background-color: hsl(235, 21%, 11%);
@@ -82,6 +83,9 @@ main {
 .button-dark {
     border: 1px solid hsl(234, 39%, 85%);
     color: hsl(234, 39%, 85%);
+}
+.menu-dark {
+    background-color: hsl(240, 5%, 8%);
 }
 
 //Light theme classes 
@@ -111,10 +115,10 @@ main {
     border: 1px solid hsl(233, 11%, 84%);
 }
 .bg-image-light {
-    background-image: url("../images/bg-mobile-light.jpg");
-    @include responsive($tablet_large){
-        background-image: url("../images/bg-desktop-light.jpg");
-    }
+    background-image: url("../images/mobile-bg-light.jpg");
+    // @include responsive($tablet_large){
+    //     background-image: url("../images/desktop-bg-light.jpg");
+    // }
 }
 .main-light {
     background-color: hsl(236, 33%, 92%);
@@ -123,4 +127,6 @@ main {
     border: 1px solid $very_dark_grayish_blue;
     color: $very_dark_grayish_blue;
 }
-
+.menu-light {
+    background-color: $dark_grayish_blue;
+}
