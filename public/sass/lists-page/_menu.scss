@@ -1,0 +1,137 @@
+.menu {
+  align-self: flex-end;
+  height: 50px;
+  padding-top: 30px;
+
+  .menu-toggler {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 1000;
+
+    &__line {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background-color: $very_light_gray;
+    }
+    .line-1 {
+      top: 0px;
+    }
+    .line-2 {
+      top: 10px;
+      opacity: 1;
+    }
+    .line-3 {
+      top: 20px;
+    }
+    .line-1-open {
+      animation-name: animateLineOne;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+    .line-2-open {
+      animation-name: animateLineTwo;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+    .line-3-open {
+      animation-name: animateLineThree;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+    .line-1-close {
+      animation-name: animateLineOneReverse;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+    .line-2-close {
+      animation-name: animateLineTwoReverse;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+    .line-3-close {
+      animation-name: animateLineThreeReverse;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+    @keyframes animateLineOne {
+      0% {top: 0px}
+      50% {top: 10px; transform: rotate(0deg);}
+      100% { top: 10px; transform-origin: center; transform: rotate(45deg);}
+    }
+    @keyframes animateLineTwo {
+      0% {opacity: 1}
+      100% {opacity: 0}
+    }
+    @keyframes animateLineThree {
+      0% {top: 20px}
+      50% {top: 10px; transform: rotate(0deg);}
+      100% {top: 10px; transform-origin: center; transform: rotate(-45deg); }
+    }
+    @keyframes animateLineOneReverse {
+      0% { top: 10px; transform-origin: center; transform: rotate(45deg);}
+      50% {top: 10px; transform: rotate(0deg);}
+      100% {top: 0px}
+    }
+    @keyframes animateLineTwoReverse {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+    @keyframes animateLineThreeReverse {
+      0% {top: 10px; transform-origin: center; transform: rotate(-45deg); }
+      50% {top: 10px; transform: rotate(0deg);}
+      100% {top: 20px}
+    }
+  }
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    transition-property: left;
+    transition-duration: 400ms;
+    z-index: 100;
+
+    &__inner {
+      height: 100%;
+      width: 70%;
+      max-width: 350px;
+      top: 0;
+      padding: 20px 20px 20px 50px;
+
+      &-top {
+        display: flex;
+        justify-content:flex-end; 
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 50px;
+
+        .theme-icon {
+          width: 25px;
+          height: 25px;
+        }
+        .logout-btn {
+          @include flex_centered(row);
+          height: 30px;
+          border: 1px solid $very_light_gray;
+          border-radius: 3px;
+          color: $very_light_gray;
+          padding: 0 10px;
+        }
+      }
+      &-option {
+        color: $very_light_gray;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  .menu-shown {
+    left: 0;
+  }
+  .menu-hidden {
+    left: -100vw;
+  }
+}

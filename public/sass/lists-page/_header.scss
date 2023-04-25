@@ -1,32 +1,17 @@
 .header {
-    @include flex_centered(row);
-    justify-content: space-between;
+    height: 110px;
     width: 100%;
     max-width: 500px;
-    margin: 50px 0 35px;
-    @include responsive($tablet_large){
-        margin: 75px 0 35px;
-    }
+    @include flex_centered(row);
+    align-items: flex-end;
 
     h1 {
-        font-size: 1.7rem;
+        text-align: center;
+        font-size: 1.4rem;
         letter-spacing: 7px;
         color: white;
         @include responsive($tablet_large){
             font-size: 2.2rem;
-        }
-    }
-
-    button{
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    .icon-moon, .icon-sun {
-        width: 20px;
-        @include responsive($tablet_large){
-            width: 25px;
         }
     }
 }

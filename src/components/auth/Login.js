@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 function Login(props){
@@ -9,6 +9,7 @@ function Login(props){
     const [register, setRegister] = useState("back");
     const [loginForm, setLoginForm] = useState("show-flex");
     const [registerForm, setRegisterForm] = useState("hidden");
+    const [height, setHeight] = useState("body-login");
 
     // this is for the forgot password button
     // const [visibility, setVisibility] =  useState("form-flex");
@@ -17,23 +18,17 @@ function Login(props){
     const [labelText, setLabelText] = useState("Passwords do not match");
     const [labelVisibility, setLabelVisibility] = useState("invisible");
 
-    const [loginEmailValue, setLoginEmailValue] = useState("");
+    const [loginUsernameValue, setLoginUsernameValue] = useState("");
     const [loginPasswordValue, setLoginPasswordValue] = useState("");
-    const [registerEmailValue, setRegisterEmailValue] = useState("");
+    const [registerUsernameValue, setRegisterUsernameValue] = useState("");
     const [registerPasswordValue, setRegisterPasswordValue] = useState("");
     const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
 
-    //Set input values 
-    function handleLoginEmailInputChange(e){
-        setLoginEmailValue(e.target.value);
-    }
-    function handleLoginPasswordInputChange(e){
-        setLoginPasswordValue(e.target.value);
-    }
-    function handleRegisterEmailInputChange(e){
-        setRegisterEmailValue(e.target.value);
-    }
+    useEffect(() => {
+        if(props.registerSuccess) switchForm();
+    }, [props.registerSuccess])
+
     function handleRegisterPasswordInputChange(e){
         setRegisterPasswordValue(e.target.value);
         if(confirmPasswordValue === e.target.value) {
@@ -56,52 +51,51 @@ function Login(props){
             setLabelText("Passwords do not match")
         } 
     }
-    
-    function handleBlur() {
-        setLabelVisibility("invisible");
-    }
 
-    function handleFocus() {
-        setLabelVisibility("visible");
-    }
-
-    // Animates change from login to register
-    function handleLoginClick(){
-        setLogin("front");
-        setLoginForm("show-flex");
-        setRegisterForm("hidden")
-        // setVisibility("form-flex")
-        setTimeout(() => {
-            setBodyShadow("shadow-right");
-            setRegister("back");
-        }, 200);
-    }
-    
-    // Animates change from register to login
-    function handleRegisterClick(){
-        setLoginEmailValue("");
-        setLoginPasswordValue("");
-
-        setRegister("front");
-        
-        setLoginForm("hidden");
-        setRegisterForm("show-flex")
-        // setVisibility("form-hidden")
-        setTimeout(() => {
-            setBodyShadow("shadow-left");
-            setLogin("back");
-        }, 200);
+    function switchForm(e) {
+        const option = e === undefined ? "login" : e.target.id
+        if(option === "login") {
+            //show login form
+            setHeight("body-login")
+            setLogin("front");
+            setLoginForm("show-flex");
+            setTimeout(() => {
+                setBodyShadow("shadow-right");
+                setRegister("back");
+            }, 200);
+            //hide register form
+            setRegisterForm("hidden")
+            setRegisterUsernameValue("")
+            setRegisterPasswordValue("")
+            setConfirmPasswordValue("")
+        }
+        if(option === "register") {
+            //show register form
+            setHeight("body-register")
+            setRegister("front");
+            setRegisterForm("show-flex")
+            setTimeout(() => {
+                setBodyShadow("shadow-left");
+                setLogin("back");
+            }, 200);
+            //hide login form
+            setLoginForm("hidden");
+            setLoginUsernameValue("");
+            setLoginPasswordValue("");
+            props.setRegisterMessage("");
+        }
+        props.setErrorMessage("");
     }
 
     function registerUser(e){
         e.preventDefault();
-        const email = registerEmailValue;
+        const username = registerUsernameValue;
         const password = registerPasswordValue;
 
-        props.registerUser(email, password);
+        props.registerUser(username, password);
 
-        if(props.errorMessage === "") {
-            setRegisterEmailValue("");
+        if(props.registerSuccess) {
+            setRegisterUsernameValue("");
             setRegisterPasswordValue("");
             setConfirmPasswordValue("");
         }
@@ -109,34 +103,34 @@ function Login(props){
     
     function handleLogin(e) {
         e.preventDefault();
-        props.handleLogin(loginEmailValue, loginPasswordValue);
+        props.handleLogin(loginUsernameValue, loginPasswordValue);
     }
 
     return (
         <div className="login">
             <div className="login__header">
-                <h1 className="login__header-title">TODO</h1>
+                <h1 className="login__header-title">TO DOS</h1>
             </div>
             <div className="login__top">
-                <div onClick={handleLoginClick} className={`top__${login} top__login top__section`}>
-                    <h1>Login</h1>
-                </div>
-                <div onClick={handleRegisterClick} className={`top__${register} top__register top__section`}>
-                    <h1>Register</h1>
+                <div id="login" onClick={switchForm} className={`top__${login} top__login top__section`}>
+                    <h1 id="login">Login</h1>
+                </div> 
+                <div id="register" onClick={switchForm} className={`top__${register} top__register top__section`}>
+                    <h1 id="register">Register</h1>
                 </div>
             </div>
-            <div className={`login__body ${bodyShadow}`}>
+            <div className={`login__body ${bodyShadow} ${height}`}>
                 <form onSubmit={handleLogin} className={`login-form ${loginForm}`}>
                     <div className="form-inputs">
                         <input 
-                        onChange={handleLoginEmailInputChange} 
-                        type="email"  
-                        placeholder="Email" 
-                        value={loginEmailValue}
+                        onChange={(e) => setLoginUsernameValue(e.target.value)} 
+                        type="text"  
+                        placeholder="Username" 
+                        value={loginUsernameValue}
                         required>
                         </input>
                         <input 
-                        onChange={handleLoginPasswordInputChange}
+                        onChange={(e) => setLoginPasswordValue(e.target.value)}
                         type="password"  
                         placeholder="Password" 
                         value={loginPasswordValue}
@@ -150,30 +144,34 @@ function Login(props){
                 <form onSubmit={registerUser}  className={`register-form ${registerForm}`}>
                     <div className="form-inputs">
                         <input 
-                        onChange={handleRegisterEmailInputChange} 
-                        type="email"  
-                        placeholder="Email" 
-                        value={registerEmailValue}
-                        required></input>
+                            onChange={(e) => setRegisterUsernameValue(e.target.value)} 
+                            type="text"  
+                            placeholder="Username" 
+                            value={registerUsernameValue}
+                            required>
+                        </input>
                         <input 
-                        onChange={handleRegisterPasswordInputChange} 
-                        type="password"  
-                        placeholder="Password" 
-                        value={registerPasswordValue}
-                        required></input>
+                            onChange={handleRegisterPasswordInputChange} 
+                            type="password"  
+                            placeholder="Password" 
+                            value={registerPasswordValue}
+                            required>
+                        </input>
                         <input 
-                        name="confirmPassword" 
-                        onChange={handleConfirmPasswordInputChange} 
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        type="password"  
-                        placeholder="Confirm password"
-                        value={confirmPasswordValue}
-                        required></input>
+                            name="confirmPassword" 
+                            onChange={handleConfirmPasswordInputChange} 
+                            onFocus={() => setLabelVisibility("visible")}
+                            onBlur={() => setLabelVisibility("invisible")}
+                            type="password"  
+                            placeholder="Confirm password"
+                            value={confirmPasswordValue}
+                            required>
+                        </input>
                         <label 
-                        htmlFor="confirmPasswrod"
-                        className={`${labelVisibility} ${passwordMatch}`}
-                        >{labelText}</label>
+                            htmlFor="confirmPasswrod"
+                            className={`${labelVisibility} ${passwordMatch}`}
+                            >{labelText}
+                        </label>
                     </div>
                     <button type="submit">Register</button>
                 </form>

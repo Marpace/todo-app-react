@@ -17,43 +17,62 @@ body, button, input {
   font-size: 18px;
 }
 
+.loading-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 20px;
+  width: 20px;
+  border-top: 2px solid rgb(158, 236, 255);
+  border-right: 2px solid transparent;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 1.5s linear infinite;
+}
+
+.loading-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 20px;
+  width: 20px;
+  border-bottom: 2px solid rgb(192, 88, 243);
+  border-left: 2px solid transparent;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 .header {
+  height: 110px;
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 500px;
-  margin: 50px 0 35px;
-}
-@media only screen and (min-width: 992px) {
-  .header {
-    margin: 75px 0 35px;
-  }
+  align-items: flex-end;
 }
 .header h1 {
-  font-size: 1.7rem;
+  text-align: center;
+  font-size: 1.4rem;
   letter-spacing: 7px;
   color: white;
 }
 @media only screen and (min-width: 992px) {
   .header h1 {
     font-size: 2.2rem;
-  }
-}
-.header button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.header .icon-moon, .header .icon-sun {
-  width: 20px;
-}
-@media only screen and (min-width: 992px) {
-  .header .icon-moon, .header .icon-sun {
-    width: 25px;
   }
 }
 
@@ -80,8 +99,10 @@ body, button, input {
   cursor: pointer;
   user-select: none;
 }
-.filter .filter-option:hover {
-  color: hsl(233deg, 11%, 84%);
+@media only screen and (min-width: 1440px) {
+  .filter .filter-option:hover {
+    color: hsl(233deg, 11%, 84%);
+  }
 }
 .filter .filter-active {
   color: hsl(220deg, 98%, 61%);
@@ -130,6 +151,187 @@ body, button, input {
   color: hsl(235deg, 24%, 19%);
   background-image: linear-gradient(140deg, hsl(192deg, 100%, 81%), hsl(280deg, 87%, 65%));
   border-color: hsl(235deg, 24%, 19%);
+}
+
+.menu {
+  align-self: flex-end;
+  height: 50px;
+  padding-top: 30px;
+}
+.menu .menu-toggler {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 1000;
+}
+.menu .menu-toggler__line {
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: hsl(0deg, 0%, 98%);
+}
+.menu .menu-toggler .line-1 {
+  top: 0px;
+}
+.menu .menu-toggler .line-2 {
+  top: 10px;
+  opacity: 1;
+}
+.menu .menu-toggler .line-3 {
+  top: 20px;
+}
+.menu .menu-toggler .line-1-open {
+  animation-name: animateLineOne;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+.menu .menu-toggler .line-2-open {
+  animation-name: animateLineTwo;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+.menu .menu-toggler .line-3-open {
+  animation-name: animateLineThree;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+.menu .menu-toggler .line-1-close {
+  animation-name: animateLineOneReverse;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+.menu .menu-toggler .line-2-close {
+  animation-name: animateLineTwoReverse;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+.menu .menu-toggler .line-3-close {
+  animation-name: animateLineThreeReverse;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+@keyframes animateLineOne {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: 10px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 10px;
+    transform-origin: center;
+    transform: rotate(45deg);
+  }
+}
+@keyframes animateLineTwo {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes animateLineThree {
+  0% {
+    top: 20px;
+  }
+  50% {
+    top: 10px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 10px;
+    transform-origin: center;
+    transform: rotate(-45deg);
+  }
+}
+@keyframes animateLineOneReverse {
+  0% {
+    top: 10px;
+    transform-origin: center;
+    transform: rotate(45deg);
+  }
+  50% {
+    top: 10px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 0px;
+  }
+}
+@keyframes animateLineTwoReverse {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes animateLineThreeReverse {
+  0% {
+    top: 10px;
+    transform-origin: center;
+    transform: rotate(-45deg);
+  }
+  50% {
+    top: 10px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 20px;
+  }
+}
+.menu .side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(3px);
+  transition-property: left;
+  transition-duration: 400ms;
+  z-index: 100;
+}
+.menu .side-menu__inner {
+  height: 100%;
+  width: 70%;
+  max-width: 350px;
+  top: 0;
+  padding: 20px 20px 20px 50px;
+}
+.menu .side-menu__inner-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+.menu .side-menu__inner-top .theme-icon {
+  width: 25px;
+  height: 25px;
+}
+.menu .side-menu__inner-top .logout-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 30px;
+  border: 1px solid hsl(0deg, 0%, 98%);
+  border-radius: 3px;
+  color: hsl(0deg, 0%, 98%);
+  padding: 0 10px;
+}
+.menu .side-menu__inner-option {
+  color: hsl(0deg, 0%, 98%);
+  margin-bottom: 30px;
+}
+.menu .menu-shown {
+  left: 0;
+}
+.menu .menu-hidden {
+  left: -100vw;
 }
 
 .collapsed-wrap__list {
@@ -213,6 +415,14 @@ body, button, input {
 .todo-list-wrap {
   width: 100%;
 }
+.todo-list-wrap .back-btn {
+  position: absolute;
+  left: 20px;
+  top: 30px;
+}
+.todo-list-wrap .back-btn__icon {
+  width: 35px;
+}
 .todo-list-wrap .todo-list {
   position: relative;
   margin: 15px 0 0;
@@ -225,33 +435,44 @@ body, button, input {
   gap: 1px;
   border-radius: 5px 5px 0 0;
 }
-.todo-list-wrap .light::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 90%;
-  height: 90%;
-  height: 2px;
-  z-index: -1;
-  box-shadow: 0 5px 25px 1px rgb(100, 100, 100);
+.todo-list-wrap .save-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
-.todo-list-wrap .back-to-lists-wrap {
-  text-align: center;
-}
-.todo-list-wrap .back-to-lists-wrap .back-to-lists-btn {
+.todo-list-wrap .save-list__btn {
+  position: relative;
   background: none;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1rem;
-  transition: 0.4s;
-  cursor: pointer;
+  height: 40px;
   width: 200px;
-  margin: 50px 0;
+  border-radius: 4px;
 }
-.todo-list-wrap .back-to-lists-wrap .back-to-lists-btn:hover {
-  color: hsl(235deg, 24%, 19%);
-  background-image: linear-gradient(140deg, hsl(192deg, 100%, 81%), hsl(280deg, 87%, 65%));
-  border-color: hsl(235deg, 24%, 19%);
+.todo-list-wrap .banner {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  translate: -50% 0;
+  padding: 20px 0;
+  background-color: white;
+  width: 210px;
+  text-align: center;
+  border-radius: 10px;
+}
+.todo-list-wrap .show-banner {
+  animation-name: showBanner;
+  animation-duration: 2000ms;
+}
+@keyframes showBanner {
+  20% {
+    top: 30px;
+  }
+  70% {
+    top: 30px;
+  }
+  100% {
+    top: -100px;
+  }
 }
 
 .todo-list__item {
@@ -416,7 +637,6 @@ body, button, input {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  margin-top: 50px;
 }
 .create-list .new-list-btn, .create-list .new-list-form button {
   background: none;
@@ -426,7 +646,6 @@ body, button, input {
   transition: 0.4s;
   cursor: pointer;
   width: 200px;
-  margin: 30px 0 0;
 }
 .create-list .new-list-btn:hover {
   color: hsl(235deg, 24%, 19%);
@@ -529,6 +748,7 @@ body, button, input {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  z-index: 100;
 }
 .delete-account-modal__body {
   height: 200px;
@@ -668,12 +888,11 @@ body, button, input {
 .login__body {
   position: relative;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  height: 400px;
+  gap: 20px;
   width: 90%;
   max-width: 400px;
-  padding: 20px 0;
   display: flex;
   background-color: hsl(235deg, 24%, 19%);
   z-index: 100;
@@ -681,13 +900,10 @@ body, button, input {
   box-shadow: 0px 15px 17px -12px rgb(20, 20, 20);
 }
 .login__body .login-form, .login__body .register-form {
-  position: absolute;
-  top: 20%;
   display: flex;
   flex-direction: column;
   gap: 25px;
   align-items: center;
-  height: 60%;
   width: 100%;
   transition: 0.2s;
 }
@@ -703,33 +919,17 @@ body, button, input {
   width: 200px;
   position: relative;
 }
-.login__body .login-form button:hover, .login__body .register-form button:hover {
-  color: hsl(235deg, 24%, 19%);
-  background-image: linear-gradient(140deg, hsl(192deg, 100%, 81%), hsl(280deg, 87%, 65%));
+@media only screen and (min-width: 1440px) {
+  .login__body .login-form button:hover, .login__body .register-form button:hover {
+    color: hsl(235deg, 24%, 19%);
+    background-image: linear-gradient(140deg, hsl(192deg, 100%, 81%), hsl(280deg, 87%, 65%));
+  }
 }
 .login__body .login-form .login-button, .login__body .register-form .login-button {
   height: 42px;
 }
-.login__body .login-form .loading-button::after, .login__body .register-form .loading-button::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 20px;
-  width: 20px;
-  border-top: 2px solid hsl(192deg, 100%, 81%);
-  border-bottom: 2px solid hsl(280deg, 87%, 65%);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: spin 1.5s linear infinite;
-}
-@keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+.login__body .login-form .register-msg, .login__body .register-form .register-msg {
+  color: rgb(120, 209, 120);
 }
 .login__body .register-form {
   gap: 50px;
@@ -762,7 +962,7 @@ body, button, input {
 }
 .login__body .form-inputs label {
   position: absolute;
-  top: 190px;
+  top: 230px;
   left: 20px;
   font-size: 0.9rem;
 }
@@ -776,6 +976,12 @@ body, button, input {
   cursor: pointer;
   background: none;
   border: none;
+}
+.login .body-login {
+  height: 300px;
+}
+.login .body-register {
+  height: 400px;
 }
 .login .shadow-right::before {
   content: "";
@@ -814,6 +1020,7 @@ main .bg-img {
   position: absolute;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   z-index: 10;
 }
 main .wrap {
@@ -880,12 +1087,7 @@ main .wrap {
 }
 
 .bg-image-dark {
-  background-image: url("../images/bg-mobile-dark.jpg");
-}
-@media only screen and (min-width: 992px) {
-  .bg-image-dark {
-    background-image: url("../images/bg-desktop-dark.jpg");
-  }
+  background-image: url("../images/mobile-bg-dark.jpg");
 }
 
 .main-dark {
@@ -895,6 +1097,10 @@ main .wrap {
 .button-dark {
   border: 1px solid hsl(234deg, 39%, 85%);
   color: hsl(234deg, 39%, 85%);
+}
+
+.menu-dark {
+  background-color: hsl(240deg, 5%, 8%);
 }
 
 .bg-light {
@@ -929,12 +1135,7 @@ main .wrap {
 }
 
 .bg-image-light {
-  background-image: url("../images/bg-mobile-light.jpg");
-}
-@media only screen and (min-width: 992px) {
-  .bg-image-light {
-    background-image: url("../images/bg-desktop-light.jpg");
-  }
+  background-image: url("../images/mobile-bg-light.jpg");
 }
 
 .main-light {
@@ -944,4 +1145,8 @@ main .wrap {
 .button-light {
   border: 1px solid hsl(233deg, 14%, 35%);
   color: hsl(233deg, 14%, 35%);
+}
+
+.menu-light {
+  background-color: hsl(236deg, 9%, 61%);
 }

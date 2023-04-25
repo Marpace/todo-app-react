@@ -3,10 +3,13 @@
 @import "base/reset";
 @import "base/typography";
 
+@import "components/buttons";
+
 @import "lists-page/header";
 @import "lists-page/filter";
 @import "lists-page/bottom-text";
 @import "lists-page/list-page";
+@import "lists-page/menu";
 
 @import "lists-page/list/collapsed-lists";
 @import "lists-page/list/input-form";
@@ -17,7 +20,7 @@
 @import "lists-page/list/new-list-form";
 
 @import "lists-page/modals/delete-list-modal";
-@import "lists-page/modals/delete-account-modal";
+@import "lists-page/modals/modal";
 
 @import "auth/login";
 

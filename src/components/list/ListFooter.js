@@ -11,7 +11,7 @@ function ListFooter(props){
     const item = props.itemsLeft === 1 ? "item" : "items"
 
     return (
-        <div className={`todo-list__footer bg-${props.theme}`}>
+        <div className={`todo-list__footer bg-${props.theme} ${props.showFooter ? "" : "hidden"}`}>
             <span className="pending">{props.itemsLeft} {item} left</span>
             <div className={`todo-list__footer-filter`}>
                 <span onClick={handleClick} id="all" className={`filter-option ${props.filter === "all" ? "filter-active" : ""}`}>All</span>

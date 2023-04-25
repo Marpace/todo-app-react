@@ -6,7 +6,8 @@ import LogoutBtn from "../buttons/LogoutBtn"
 import LoadingScreen from "../loadingScreen"
 import CollapsedList from "./CollapsedList";
 import DeleteAccountBtn from "../buttons/DeleteAccountBtn";
-import DeleteAccountModal from "../modals/DeleteAccountModal";
+import Modal from "../modals/Modal";
+import Menu from "../Menu";
 
 function ListsPage(props) {
 
@@ -14,16 +15,17 @@ function ListsPage(props) {
     const [singleList, setSingleList] = useState(null);
     const [theme, setTheme] = useState("");
     const [loading, setLoading] = useState(true);
-    const [header, setHeader] = useState("TODO");
-    const [deleteAccountModal, setDeleteAccountModal] = useState("hidden");
+    const [header, setHeader] = useState("");
+    const [showModal, setShowModal] = useState(false);
 
 
     useEffect(() => {
         getTheme();
         getLists();
+        const username = localStorage.getItem("username")
+        setHeader(`${username}'s lists`)
         const list = JSON.parse(localStorage.getItem("list"));
         if(list !== null) {
-            console.log(list)
             setSingleList(list)
             setHeader(list.title)
         }
@@ -118,6 +120,7 @@ function ListsPage(props) {
     }
       
     function changeTheme(theme){
+        setTheme(prev => prev === "dark" ? "light" : "dark")
         fetch(`${props.base_url}/set-theme`, {
             method: "POST",
             headers: {
@@ -128,8 +131,8 @@ function ListsPage(props) {
         })
         .then(() => {
             console.log("switched theme");
-            getTheme();
         })
+        .catch(err => console.log(err))
     }
     
 
@@ -155,6 +158,15 @@ function ListsPage(props) {
         }
         else return (
             <div className={`collapsed-wrap`}>
+                <div className={`no-lists ${lists.length < 1 ? "" : "hidden"}`}>
+                    <p className={`text-${theme}`}>You don't have any lists</p>
+                </div>
+
+                <NewListBtn 
+                    theme={theme}
+                    createList={createList}
+                />
+
                 {lists.map((list) => (
                     <CollapsedList 
                         key={list._id}
@@ -166,22 +178,23 @@ function ListsPage(props) {
                         deleteList={deleteList}
                     />
                 ))}
-                <NewListBtn 
-                    theme={theme}
-                    createList={createList}
-                />
-                <LogoutBtn 
+                
+                
+                {/* <LogoutBtn 
                     theme={theme}
                     onLogout={props.onLogout}
                 />   
                 <DeleteAccountBtn 
                     setModal={setDeleteAccountModal}
                     theme={theme}
-                /> 
-                <DeleteAccountModal 
-                    deleteUser={props.deleteUser}
-                    modal={deleteAccountModal}
-                    setModal={setDeleteAccountModal}
+                />  */}
+                <Modal 
+                    lineOne="Delete account?"
+                    lineTwo="All your lists wil be deleted"
+                    buttonContent="Delete"
+                    showModal={showModal}
+                    buttonFunction={props.deleteUser}
+                    setShowModal={setShowModal} 
                 />
             </div>
         )
@@ -191,10 +204,14 @@ function ListsPage(props) {
         <main className={`main-${theme}`}>
             <div className={`bg-img bg-image-${theme}`}></div>
             <div className="wrap">
+                <Menu 
+                    theme={theme}
+                    userLogout={props.userLogout}
+                    setShowModal={setShowModal}
+                    changeTheme={changeTheme}
+                />
                 <Header 
                     header={header}
-                    theme={theme}
-                    changeTheme={changeTheme}
                 />
                 {renderLayout()}
             </div>

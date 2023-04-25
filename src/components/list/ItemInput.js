@@ -5,13 +5,9 @@ function ItemInput(props) {
 
     const [inputValue, setInputValue] = useState("");
 
-    function handleChange(e){
-        setInputValue(e.target.value);
-    }
-
     function handleSubmit(e){
         e.preventDefault();
-        props.addItem(inputValue);
+        props.addItem(inputValue, "active");
         setInputValue("");
     }
 
@@ -21,7 +17,7 @@ function ItemInput(props) {
             placeholder="Create a new todo..." 
             className={`input-text-${props.theme}`} 
             value={inputValue}
-            onChange={handleChange}
+            onChange={(e) => setInputValue(e.target.value)}
             required 
             autoFocus></input>
             <button type="submit" className="input-submit">ADD</button>
